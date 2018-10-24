@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,5 +32,11 @@ public class AppController {
 	@GetMapping("/{id}")
 	public Pessoa getPessoa(@PathVariable(name="id", required=true) int id) {
 		return pessoas.buscaPessoa(id);
+	}
+	
+	@ResponseBody
+	@PutMapping("/{id}")
+	public boolean editaPessoa(@PathVariable(name="id", required=true) int id, @RequestBody Pessoa p) {
+		return pessoas.editarDados(id, p.getNome(), new SimpleDateFormat("dd/MM/yyyy").format(p.getDataNasc()), p.getCpf());
 	}
 }

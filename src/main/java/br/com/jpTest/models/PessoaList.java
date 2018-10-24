@@ -33,4 +33,32 @@ public class PessoaList {
 		
 		return new Pessoa(0,"","","");
 	}
+	
+	public boolean editarDados(int id, String nome, String dataNasc, String cpf) {
+		
+		Pessoa p = this.buscaPessoa(id);
+		if(p.getId() != 0) {
+			if(nome != "") {
+				p.setNome(nome);
+			}
+			
+			if(dataNasc != "") {
+				System.out.println(dataNasc);
+				p.setDataNasc(dataNasc);
+			}
+			
+			if(cpf != "") {
+				p.setCpf(cpf);
+			}
+			
+			System.out.println(pessoas.set(id-1, p));
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public List<Pessoa> getPessoas(){
+		return this.pessoas;
+	}
 }
